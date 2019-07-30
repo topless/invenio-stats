@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of Invenio.
-# Copyright (C) 2017-2018 CERN.
+# Copyright (C) 2017-2019 CERN.
 #
 # Invenio is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
@@ -19,7 +19,8 @@ from dateutil import parser
 from elasticsearch import VERSION as ES_VERSION
 from elasticsearch.helpers import bulk
 from elasticsearch_dsl import Index, Search
-from invenio_search import current_search_client, current_search
+from invenio_search import current_search, current_search_client
+from invenio_search.utils import prefix_index
 
 from .utils import get_doctype, get_size
 
@@ -249,7 +250,8 @@ class StatAggregator(object):
         self.name = name
         self.client = client or current_search_client
         self.event = event
-        self.aggregation_alias = 'stats-{}'.format(self.event)
+        aggregation_alias = 'stats-{}'.format(self.event)
+        self.aggregation_alias = prefix_index(aggregation_alias)
         self.aggregation_field = aggregation_field
         self.metric_aggregation_fields = metric_aggregation_fields or {}
         self.allowed_metrics = {
@@ -272,7 +274,7 @@ class StatAggregator(object):
         self.index_name_suffix = SUPPORTED_INTERVAL[index_interval]
         self.doc_id_suffix = SUPPORTED_INTERVAL[aggregation_interval]
         self.batch_size = batch_size
-        self.event_index = 'events-stats-{}'.format(self.event)
+        self.event_index = prefix_index('events-stats-{}'.format(self.event))
         self.indices = set()
         self.has_events = True
         self.bookmark_api = BookmarkAPI(
@@ -347,6 +349,7 @@ class StatAggregator(object):
                              format(self.event,
                                     interval_date.strftime(
                                         self.index_name_suffix))
+                index_name = prefix_index(index_name)
                 self.indices.add(index_name)
 
                 yield dict(_id='{0}-{1}'.
