@@ -46,7 +46,7 @@ def format_range_dt(dt, interval):
     return '{0}||/{1}'.format(dt, dt_rounding_map[interval])
 
 
-class BookmarkApi(object):
+class BookmarkAPI(object):
     """Bookmark API class.
 
     It provides an interface that lets us interact with a bookmark.
@@ -94,8 +94,8 @@ class BookmarkApi(object):
         if not Index(self.bookmark_index, using=self.client).exists():
             # TODO: change the mapping accordingly to ES version
             self.client.indices.create(
-                index=self.bookmark_index, body=BookmarkApi.MAPPINGS
-                if ES_VERSION[0] < 7 else BookmarkApi.MAPPINGS_ES7)
+                index=self.bookmark_index, body=BookmarkAPI.MAPPINGS
+                if ES_VERSION[0] < 7 else BookmarkAPI.MAPPINGS_ES7)
 
     def set_bookmark(self, new_date):
         """Set bookmark for starting next aggregation."""
@@ -275,7 +275,7 @@ class StatAggregator(object):
         self.event_index = 'events-stats-{}'.format(self.event)
         self.indices = set()
         self.has_events = True
-        self.bookmark_api = BookmarkApi(
+        self.bookmark_api = BookmarkAPI(
             self.client, self.aggregation_doc_type,
             self.event_index, self.aggregation_interval)
 
