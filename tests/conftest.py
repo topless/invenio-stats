@@ -189,7 +189,7 @@ def event_queues(app):
 
 
 @pytest.yield_fixture()
-def base_app():
+def base_app(event_entrypoints):
     """Flask application fixture without InvenioStats."""
     from invenio_stats.config import STATS_EVENTS
     instance_path = tempfile.mkdtemp()
@@ -250,7 +250,7 @@ def base_app():
 
 
 @pytest.yield_fixture()
-def app(base_app, event_entrypoints):
+def app(base_app):
     """Flask application fixture with InvenioStats."""
     base_app.register_blueprint(blueprint)
     InvenioStats(base_app)
