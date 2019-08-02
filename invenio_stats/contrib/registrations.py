@@ -22,23 +22,33 @@ def register_events():
         dict(
             event_type='file-download',
             templates='invenio_stats.contrib.file_download',
+            signal='invenio_files_rest.signals.file_downloaded',
+            event_builders=['invenio_stats.contrib.event_builders'
+                            '.file_download_event_builder'],
             processor_class=EventsIndexer,
             processor_config=dict(
                 preprocessors=[
                     flag_robots,
                     anonymize_user,
                     build_file_unique_id
-                ])),
+                ]
+            )
+        ),
         dict(
             event_type='record-view',
             templates='invenio_stats.contrib.record_view',
+            signal='invenio_records_ui.signals.record_viewed',
+            event_builders=['invenio_stats.contrib.event_builders'
+                            '.record_view_event_builder'],
             processor_class=EventsIndexer,
             processor_config=dict(
                 preprocessors=[
                     flag_robots,
                     anonymize_user,
                     build_record_unique_id
-                ]))
+                ]
+            )
+        )
     ]
 
 
