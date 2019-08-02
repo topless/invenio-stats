@@ -40,6 +40,8 @@ is the name of the emitted event.
     can update it. Keep in mind that these functions will run synchronously
     during the creation of the event, meaning that if the signal is sent during
     a request they will increase the response time.
+
+You can find a sampe of STATS_EVENT configuration in the `registrations.py`
 """
 
 
