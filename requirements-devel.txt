@@ -12,5 +12,6 @@
 #     -e git+git://github.com/mitsuhiko/werkzeug.git#egg=Werkzeug
 #     -e git+git://github.com/mitsuhiko/jinja2.git#egg=Jinja2
 
--e git+https://github.com/inveniosoftware/invenio-queues.git#egg=invenio-queues
+-e git+https://github.com/topless/invenio-queues.git@docs#egg=invenio-queues
 -e git+https://github.com/inveniosoftware/invenio-search.git#egg=invenio-search
+-e git+https://github.com/inveniosoftware/invenio-base.git#egg=invenio-base

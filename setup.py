@@ -24,18 +24,18 @@ tests_require = [
     'invenio-oauth2server>=1.0.1',
     'invenio-records-ui>=1.0.1',
     'invenio-records>=1.0.0',
-    'isort>=4.2.15',
-    'pydocstyle>=1.0.0',
+    'isort>=4.2.2',
+    'pydocstyle>=2.0.0',
     'pytest-cov>=1.8.0',
     'pytest-pep8>=1.0.6',
-    'pytest>=3.8.1,<4',
+    'pytest>=3.8.0,<5.0.0',
 ]
 
 invenio_search_version = '1.2.3'
 
 extras_require = {
     'docs': [
-        'Sphinx>=1.4',
+        'Sphinx>=1.4.2',
     ],
     'elasticsearch2': [
         'invenio-search[elasticsearch2]>={}'.format(invenio_search_version)
@@ -69,14 +69,13 @@ setup_requires = [
 
 install_requires = [
     'counter-robots>=2018.6',
-    'Flask>=0.11.1',
+    'invenio-base>=1.2.2',
     'invenio-cache>=1.0.0',
     'invenio-celery>=1.1.3',
     'invenio-queues>=1.0.0a2',
     'maxminddb-geolite2>=2017.0404',
     'python-dateutil>=2.6.1',
     'python-geoip>=1.2',
-    'Werkzeug>=0.15.0,<1.0.0'
 ]
 
 packages = find_packages()
